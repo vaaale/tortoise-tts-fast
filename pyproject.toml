@@ -25,6 +25,7 @@ voicefixer = "^0.1.2"
 streamlit = "^1.18.1"
 gdown = "^4.6.4"
 bigvgan = {git = "https://github.com/152334H/BigVGAN.git"}
+pyaudio = "^0.2.13"
 
 [tool.poetry.dev-dependencies]
 black = "^23.1.0"

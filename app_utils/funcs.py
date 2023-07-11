@@ -53,5 +53,11 @@ def list_voices(extra_voices_dir: Optional[str]):
 @st.cache_resource(max_entries=1)
 def load_voice_conditionings(voice, extra_voices_ls):
     gc.collect()
-    voice_samples, conditioning_latents = load_voices(voice, extra_voices_ls)
+    voice_samples_, conditioning_latents = load_voices(voice, extra_voices_ls)
+    voice_samples = []
+    if voice_samples_ is not None:
+        for outer in voice_samples_:
+            for sample in outer:
+                voice_samples.append(sample)
+
     return voice_samples, conditioning_latents

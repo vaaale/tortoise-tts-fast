@@ -391,11 +391,12 @@ class TextToSpeech:
         ], "latent_averaging mode has to be one of (0, 1, 2)"
         print("mode", latent_averaging_mode)
         with torch.no_grad():
-            voice_samples = [[v.to(self.device) for v in ls] for ls in voice_samples]
+            # voice_samples = [[v.to(self.device) for v in ls] for ls in voice_samples]
+            voice_samples = [v.to(self.device) for v in voice_samples]
 
             auto_conds = []
             for ls in voice_samples:
-                auto_conds.append(format_conditioning(ls[0], device=self.device))
+                auto_conds.append(format_conditioning(ls, device=self.device))
             auto_conds = torch.stack(auto_conds, dim=1)
             with self.temporary_cuda(self.autoregressive) as ar:
                 auto_latent = ar.get_conditioning(auto_conds)
@@ -406,9 +407,9 @@ class TextToSpeech:
             for ls in voice_samples:
                 # The diffuser operates at a sample rate of 24000 (except for the latent inputs)
                 sample = (
-                    torchaudio.functional.resample(ls[0], 22050, 24000)
+                    torchaudio.functional.resample(ls, 22050, 24000)
                     if original_tortoise
-                    else ls[1]
+                    else ls
                 )
                 if latent_averaging_mode == 0:
                     sample = pad_or_truncate(sample, DURS_CONST)

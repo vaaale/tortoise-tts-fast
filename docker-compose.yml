@@ -1,0 +1,50 @@
+services:
+  tortoise-tts-fast-api:
+    hostname: tortoise-tts-fast-api
+    image: tortoise-tts-fast-api:latest
+    build:
+      context: .
+      dockerfile: Dockerfile-api
+    ports:
+      - "8000:8000"
+    environment:
+      TORTOISE_MODELS_DIR: /models
+    volumes:
+      - /home/alex/.cache:/root/.cache
+      - ${HOME}/.cache/tortoise/models:/models
+      - ${HOME}/Documents/voices:/voices
+      - ./data:/data
+      - ./output:/output
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['0']
+              capabilities: [gpu]
+  tortoise-tts-ui:
+    hostname: tortoise-tts-fast-ui
+    image: tortoise-tts-fast:latest
+    depends_on:
+      - tortoise-tts-fast-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    environment:
+      TORTOISE_MODELS_DIR: /models
+    volumes:
+      - /home/alex/.cache:/root/.cache
+      - ${HOME}/.cache/tortoise/models:/models
+      - ${HOME}/Documents/voices:/voices
+      - ./data:/data
+      - ./output:/output
+    stop_signal: SIGINT
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['0']
+              capabilities: [gpu]

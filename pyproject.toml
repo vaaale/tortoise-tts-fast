@@ -27,6 +27,8 @@ gdown = "^4.6.4"
 bigvgan = {git = "https://github.com/152334H/BigVGAN.git"}
 pyaudio = "^0.2.13"
 accelerate = "^0.20.3"
+fastapi = "^0.100.0"
+uvicorn = "^0.22.0"
 
 [tool.poetry.dev-dependencies]
 black = "^23.1.0"

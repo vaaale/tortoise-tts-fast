@@ -403,6 +403,10 @@ class UnivNetGenerator(nn.Module):
 
 from pathlib import Path
 STATIC_DIR = Path(__file__).parent.parent.parent/'static'
+if not STATIC_DIR.is_dir():
+    STATIC_DIR = Path("/app/tortoise-tts-fast/static")
+
+print(f"STATIC_DIR = {STATIC_DIR}")
 assert STATIC_DIR.is_dir()
 def BVGWithConf(fname: str):
     json_config = json.loads(

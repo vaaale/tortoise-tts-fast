@@ -58,17 +58,6 @@ mypy-extensions==1.0.0
 networkx==3.1
 numba==0.56.4
 numpy==1.23.5
-nvidia-cublas-cu11==11.10.3.66
-nvidia-cuda-cupti-cu11==11.7.101
-nvidia-cuda-nvrtc-cu11==11.7.99
-nvidia-cuda-runtime-cu11==11.7.99
-nvidia-cudnn-cu11==8.5.0.96
-nvidia-cufft-cu11==10.9.0.58
-nvidia-curand-cu11==10.2.10.91
-nvidia-cusolver-cu11==11.4.0.1
-nvidia-cusparse-cu11==11.7.4.91
-nvidia-nccl-cu11==2.14.3
-nvidia-nvtx-cu11==11.7.91
 packaging==23.1
 pandas==2.0.3
 pathspec==0.11.1
@@ -123,14 +112,10 @@ tokenizers==0.13.3
 toml==0.10.2
 tomli==2.0.1
 toolz==0.12.0
-torch==2.0.1
-torchaudio==2.0.2
 torchdiffeq==0.2.3
 torchlibrosa==0.0.7
 torchsde==0.2.5
-torchvision==0.15.2
 tornado==6.3.2
--e git+https://github.com/vaaale/tortoise-tts-fast.git@e5adb1afd5cff5df021c0a1dfabd650c24da083d#egg=tortoise
 tqdm==4.65.0
 trampoline==0.1.2
 transformers==4.29.2
@@ -146,3 +131,4 @@ wandb==0.15.5
 watchdog==3.0.0
 wcwidth==0.2.6
 zipp==3.16.0
+uvicorn==0.22.0

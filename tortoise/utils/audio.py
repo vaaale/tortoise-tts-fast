@@ -236,3 +236,12 @@ def wav_to_univnet_mel(wav, do_normalization=False, device="cuda"):
     if do_normalization:
         mel = normalize_tacotron_mel(mel)
     return mel
+
+
+def float2pcm(sig, dtype='int16'):
+    sig = np.asarray(sig)
+    dtype = np.dtype(dtype)
+    i = np.iinfo(dtype)
+    abs_max = 2 ** (i.bits - 1)
+    offset = i.min + abs_max
+    return (sig * abs_max + offset).clip(i.min, i.max).astype(dtype)

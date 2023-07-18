@@ -2,6 +2,7 @@
 
 import os
 import random
+from pathlib import Path
 from time import time
 
 import torch
@@ -624,19 +625,20 @@ class TextToSpeech:
 
         auto_conds = None
         if voice_samples is not None:
-            (
-                auto_conditioning,
-                diffusion_conditioning,
-                auto_conds,
-                _,
-            ) = self.get_conditioning_latents(
+            latents = self.get_conditioning_latents(
                 voice_samples,
                 return_mels=True,
                 latent_averaging_mode=latent_averaging_mode,
                 original_tortoise=original_tortoise,
             )
+            (
+                auto_conditioning,
+                diffusion_conditioning,
+                auto_conds,
+                _,
+            ) = latents
         elif conditioning_latents is not None:
-            auto_conditioning, diffusion_conditioning = conditioning_latents
+            auto_conditioning, diffusion_conditioning, auto_conds, _ = conditioning_latents
         else:
             (
                 auto_conditioning,

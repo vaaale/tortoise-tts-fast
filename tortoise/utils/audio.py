@@ -66,7 +66,8 @@ def load_required_audio(audiopath: str):
     for audio in audios:
         check_audio(audio, audiopath)
 
-    return [audio.unsqueeze(0) for audio in audios]
+    return audio.unsqueeze(0)
+    # return [audio.unsqueeze(0) for audio in audios]
 
 
 def load_audio(audiopath, sampling_rate):

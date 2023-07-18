@@ -35,11 +35,11 @@ services:
     environment:
       TORTOISE_MODELS_DIR: /models
     volumes:
-      - /home/alex/.cache:/root/.cache
+      - ${HOME}/.cache:/root/.cache
       - ${HOME}/.cache/tortoise/models:/models
       - ${HOME}/Documents/voices:/voices
       - ./data:/data
-      - ./output:/output
+      - ./output:/results
     stop_signal: SIGINT
     deploy:
       resources:

@@ -16,10 +16,10 @@ app = FastAPI()
 
 
 @app.post("/speak", response_class=Response)
-def speak(input: SpeakInput) -> Response:
-    voice = input.voice
-    preset = input.preset
-    text = input.text
+def speak(audio_input: SpeakInput) -> Response:
+    voice = audio_input.voice
+    preset = audio_input.preset
+    text = audio_input.text
 
     generate = GenerateCommand(voices_root=voices_root, preset=preset, voice=voice)
     buf = generate(text=text)
@@ -28,10 +28,10 @@ def speak(input: SpeakInput) -> Response:
 
 
 @app.post("/stream", response_class=StreamingResponse)
-def speak(input: SpeakInput) -> Response:
-    voice = input.voice
-    preset = input.preset
-    text = input.text
+def speak(audio_input: SpeakInput) -> Response:
+    voice = audio_input.voice
+    preset = audio_input.preset
+    text = audio_input.text
 
     generate = GenerateCommand(voices_root=voices_root, preset=preset, voice=voice)
     buf = generate(text=text)
